@@ -3,12 +3,13 @@ import axios from "axios";
 import uuid from "uuid";
 
 
-const useAxios = () => {
+const useAxios = (baseUrl) => {
     const [cards, setCards] = useState([])
 
-    const addCard = async () => {
+    const addCard = async (end_point='') => {
+        const url = baseUrl+end_point
         const response = await axios.get(
-            "https://deckofcardsapi.com/api/deck/new/draw/"
+            url
           );
           setCards(cards => [...cards, { ...response.data, id: uuid() }]);
     }
